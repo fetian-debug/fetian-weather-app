@@ -1,7 +1,7 @@
 const request = require('request')
 
 const forecast = (latitude, longitude, callback) => {
-    const url = 'https://api.darksky.net/forecast/9d1465c6f3bb7a6c71944bdd8548d026/' + latitude + ',' + longitude
+    const url = 'http://api.weatherstack.com/current?access_key=7f313b1021660647fd78530066574f9e/' + latitude + ',' + longitude
 
     request({ url, json: true }, (error, { body }) => {
         if (error) {
@@ -15,3 +15,7 @@ const forecast = (latitude, longitude, callback) => {
 }
 
 module.exports = forecast
+
+
+
+// http://api.weatherstack.com/current?access_key=7f313b1021660647fd78530066574f9e&query=New%20York
