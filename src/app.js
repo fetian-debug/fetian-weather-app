@@ -26,22 +26,22 @@ app.use(express.static(publicDirectoryPath))
 app.get('', (req, res) => {
   res.render('index', {
     title: 'Weather',
-    name: 'Andrew Mead'
+    name: 'Fetian Anas'
   })
 })
 
 app.get('/about', (req, res) => {
   res.render('about', {
     title: 'About Me',
-    name: 'Andrew Mead'
+    name: 'Fetian Anas'
   })
 })
 
 app.get('/help', (req, res) => {
   res.render('help', {
-    helpText: 'This is some helpful text.',
+    helpText: 'Weather is all phenomena related to the atmosphere of a planet. The term is usually used to follow the movement of these phenomena for a short period, while the term climate is applied to the phenomena for longer periods. What we call the atmosphere is all the physical conditions from the lower layers of the atmosphere at a given time, at a particular point.',
     title: 'Help',
-    name: 'Andrew Mead'
+    name: 'Fetian Anas'
   })
 })
 
@@ -94,7 +94,7 @@ app.get('/products', (req, res) => {
 app.get('/help/*', (req, res) => {
   res.render('404', {
     title: '404',
-    name: 'Andrew Mead',
+    name: 'Fetian Anas',
     errorMessage: 'Help article not found.'
   })
 })
@@ -102,7 +102,7 @@ app.get('/help/*', (req, res) => {
 app.get('*', (req, res) => {
   res.render('404', {
     title: '404',
-    name: 'Andrew Mead',
+    name: 'Fetian',
     errorMessage: 'Page not found.'
   })
 })
