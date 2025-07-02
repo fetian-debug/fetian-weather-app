@@ -7,19 +7,17 @@ const nextConfig = {
   images: {
     domains: ["openweathermap.org"],
   },
-  // Optimize for Vercel deployment
+  // Vercel deployment optimizations
   experimental: {
     serverComponentsExternalPackages: ["axios"],
   },
-  // Ensure API routes work properly
-  async rewrites() {
-    return [
-      {
-        source: "/api/:path*",
-        destination: "/api/:path*",
-      },
-    ];
-  },
+  // Build optimizations
+  swcMinify: true,
+  compress: true,
+  poweredByHeader: false,
+  // Ensure compatibility with Vercel
+  trailingSlash: false,
+  output: "standalone",
 };
 
 module.exports = nextConfig;

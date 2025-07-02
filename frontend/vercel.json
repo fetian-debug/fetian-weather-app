@@ -1,15 +1,17 @@
 {
+  "version": 2,
   "framework": "nextjs",
   "buildCommand": "npm run build",
   "devCommand": "npm run dev",
-  "installCommand": "npm install",
-  "env": {
-    "OPENWEATHER_API_KEY": "@openweather_api_key",
-    "MAPBOX_ACCESS_TOKEN": "@mapbox_access_token"
-  },
+  "installCommand": "npm install --legacy-peer-deps",
   "functions": {
     "app/api/weather/route.ts": {
       "maxDuration": 10
+    }
+  },
+  "build": {
+    "env": {
+      "NEXT_TELEMETRY_DISABLED": "1"
     }
   },
   "headers": [
