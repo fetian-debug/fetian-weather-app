@@ -1,6 +1,10 @@
 import axios from "axios";
 
-const API_BASE_URL = process.env.WEATHER_API_URL || "http://localhost:3000";
+// Use Next.js API routes in production, fallback to Express in development
+const API_BASE_URL =
+  process.env.NODE_ENV === "production"
+    ? "" // Use relative URLs in production (same domain)
+    : process.env.WEATHER_API_URL || "http://localhost:3000";
 
 export interface WeatherData {
   location: string;

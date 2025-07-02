@@ -1,7 +1,7 @@
 {
   "name": "weather-app",
   "version": "2.0.0",
-  "description": "A professional weather application with CLI and web interface",
+  "description": "Professional weather application with Next.js and Node.js backend",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
@@ -10,13 +10,18 @@
     "dev:web": "node web-server.js",
     "dev:frontend": "cd frontend && npm run dev",
     "setup": "cp .env.example .env && cd frontend && npm install",
+    "build": "cd frontend && npm run build",
+    "deploy": "node deploy.js",
+    "deploy:vercel": "cd frontend && vercel --prod",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "weather",
     "cli",
     "forecast",
-    "nodejs"
+    "nodejs",
+    "nextjs",
+    "vercel"
   ],
   "author": "",
   "license": "ISC",
@@ -29,5 +34,8 @@
   },
   "devDependencies": {
     "nodemon": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }

@@ -188,6 +188,34 @@ The application includes comprehensive error handling for:
 4. Add tests if applicable
 5. Submit a pull request
 
+## 🚀 Deployment
+
+### Vercel (Recommended)
+
+Deploy the Next.js frontend with built-in API routes:
+
+1. **Quick Deploy**:
+
+   ```bash
+   cd frontend && vercel --prod
+   ```
+
+2. **Set Environment Variables**:
+   - `OPENWEATHER_API_KEY`: Your OpenWeatherMap API key
+   - `MAPBOX_ACCESS_TOKEN`: Your Mapbox access token
+
+3. **Access your app**: `https://your-app.vercel.app`
+
+For detailed deployment instructions, see [DEPLOYMENT.md](DEPLOYMENT.md).
+
+### Other Platforms
+
+The Next.js frontend can also be deployed to:
+
+- **Netlify**: Set build command to `npm run build`
+- **AWS Amplify**: Use the frontend directory
+- **Docker**: Use the included Dockerfile
+
 ## License
 
 ISC License
