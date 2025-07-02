@@ -1,0 +1,33 @@
+{
+  "name": "weather-app",
+  "version": "2.0.0",
+  "description": "A professional weather application with CLI and web interface",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "node start-dev.js",
+    "dev:cli": "nodemon app.js",
+    "dev:web": "node web-server.js",
+    "dev:frontend": "cd frontend && npm run dev",
+    "setup": "cp .env.example .env && cd frontend && npm install",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "weather",
+    "cli",
+    "forecast",
+    "nodejs"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.6.0",
+    "dotenv": "^16.3.0",
+    "express": "^4.18.0",
+    "chalk": "^4.1.2",
+    "yargs": "^17.7.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.0"
+  }
+}
