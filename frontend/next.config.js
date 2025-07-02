@@ -1,20 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Remove env section to avoid build errors - use runtime environment variables instead
+  reactStrictMode: true,
   images: {
     domains: ["openweathermap.org"],
   },
-  // Vercel deployment optimizations
-  experimental: {
-    serverComponentsExternalPackages: ["axios"],
-  },
-  // Build optimizations
+  // Build optimizations compatible with Next.js 12
   swcMinify: true,
   compress: true,
   poweredByHeader: false,
-  // Ensure compatibility with Vercel
   trailingSlash: false,
-  output: "standalone",
 };
 
 module.exports = nextConfig;

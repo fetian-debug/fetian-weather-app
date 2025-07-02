@@ -1,8 +1,7 @@
-import { NextRequest, NextResponse } from "next/server";
 import axios from "axios";
 
 // Weather API functions (converted from utils)
-async function geocode(address: string) {
+async function geocode(address) {
   try {
     const encodedAddress = encodeURIComponent(address);
     const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodedAddress}.json`;
@@ -26,18 +25,16 @@ async function geocode(address: string) {
       location: feature.place_name,
     };
   } catch (error) {
-    if (axios.isAxiosError(error)) {
-      if (error.response) {
-        throw new Error(`Geocoding service error: ${error.response.status}`);
-      } else if (error.request) {
-        throw new Error("Unable to connect to location services!");
-      }
+    if (error.response) {
+      throw new Error(`Geocoding service error: ${error.response.status}`);
+    } else if (error.request) {
+      throw new Error("Unable to connect to location services!");
     }
     throw error;
   }
 }
 
-async function forecast(latitude: number, longitude: number) {
+async function forecast(latitude, longitude) {
   try {
     const url = "https://api.openweathermap.org/data/2.5/weather";
 
@@ -67,8 +64,8 @@ async function forecast(latitude: number, longitude: number) {
       summary: `${description}. It is currently ${temperature}°C (feels like ${feelsLike}°C) with ${humidity}% humidity.`,
     };
   } catch (error) {
-    if (axios.isAxiosError(error)) {
-      const status = error.response?.status;
+    if (error.response) {
+      const status = error.response.status;
       if (status === 401) {
         throw new Error("Invalid API key for weather service");
       } else if (status === 404) {
@@ -76,37 +73,36 @@ async function forecast(latitude: number, longitude: number) {
       } else {
         throw new Error(`Weather service error: ${status}`);
       }
-    } else if (axios.isAxiosError(error) && error.request) {
+    } else if (error.request) {
       throw new Error("Unable to connect to weather service!");
     }
     throw error;
   }
 }
 
-export async function GET(request: NextRequest) {
+export default async function handler(req, res) {
+  if (req.method !== "GET") {
+    return res
+      .status(405)
+      .json({ success: false, error: "Method not allowed" });
+  }
+
   try {
     // Check for required environment variables
     if (!process.env.OPENWEATHER_API_KEY || !process.env.MAPBOX_ACCESS_TOKEN) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: "Server configuration error. Missing API keys.",
-        },
-        { status: 500 },
-      );
+      return res.status(500).json({
+        success: false,
+        error: "Server configuration error. Missing API keys.",
+      });
     }
 
-    const { searchParams } = new URL(request.url);
-    const location = searchParams.get("location");
+    const { location } = req.query;
 
     if (!location) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: "Location parameter is required",
-        },
-        { status: 400 },
-      );
+      return res.status(400).json({
+        success: false,
+        error: "Location parameter is required",
+      });
     }
 
     // Get geocoding data
@@ -118,7 +114,7 @@ export async function GET(request: NextRequest) {
       geocodeData.longitude,
     );
 
-    return NextResponse.json({
+    res.status(200).json({
       success: true,
       data: {
         ...forecastData,
@@ -132,15 +128,9 @@ export async function GET(request: NextRequest) {
   } catch (error) {
     console.error("Weather API Error:", error);
 
-    return NextResponse.json(
-      {
-        success: false,
-        error:
-          error instanceof Error
-            ? error.message
-            : "An unexpected error occurred",
-      },
-      { status: 500 },
-    );
+    res.status(500).json({
+      success: false,
+      error: error.message || "An unexpected error occurred",
+    });
   }
 }
