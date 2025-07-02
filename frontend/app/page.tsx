@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
 import { Cloud, Github, ExternalLink } from "lucide-react";
 import SearchForm from "@/components/SearchForm";
 import WeatherCard from "@/components/WeatherCard";
@@ -42,19 +41,11 @@ export default function Home() {
     <main className="min-h-screen p-4 sm:p-6 lg:p-8">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
-        <motion.header
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12"
-        >
+        <header className="text-center mb-12 animate-fade-in">
           <div className="flex items-center justify-center gap-3 mb-4">
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-            >
+            <div className="animate-spin-slow">
               <Cloud className="h-12 w-12 text-white/90" />
-            </motion.div>
+            </div>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white text-shadow-lg">
               Weather
               <span className="gradient-text bg-gradient-to-r from-blue-200 to-white bg-clip-text text-transparent">
@@ -63,26 +54,19 @@ export default function Home() {
             </h1>
           </div>
 
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3, duration: 0.6 }}
-            className="text-xl text-white/80 font-light max-w-2xl mx-auto"
-          >
+          <p className="text-xl text-white/80 font-light max-w-2xl mx-auto animate-slide-up">
             Professional weather information at your fingertips. Get accurate
             forecasts for any location worldwide.
-          </motion.p>
-        </motion.header>
+          </p>
+        </header>
 
         {/* Search Section */}
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.6 }}
-          className="flex justify-center mb-12"
+        <section
+          className="flex justify-center mb-12 animate-slide-up"
+          style={{ animationDelay: "0.2s" }}
         >
           <SearchForm onSearch={handleSearch} isLoading={isLoading} />
-        </motion.section>
+        </section>
 
         {/* Content Section */}
         <section className="flex justify-center">
@@ -102,27 +86,12 @@ export default function Home() {
           )}
 
           {!weatherData && !isLoading && !error && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.6, duration: 0.6 }}
-              className="glass-card p-8 text-center max-w-lg"
+            <div
+              className="glass-card p-8 text-center max-w-lg animate-fade-in"
+              style={{ animationDelay: "0.4s" }}
             >
               <div className="mb-6">
-                <motion.div
-                  animate={{
-                    y: [0, -10, 0],
-                    rotate: [0, 5, -5, 0],
-                  }}
-                  transition={{
-                    duration: 4,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                  className="text-6xl mb-4"
-                >
-                  🌤️
-                </motion.div>
+                <div className="text-6xl mb-4 animate-bounce-slow">🌤️</div>
                 <h2 className="text-2xl font-semibold text-white mb-3">
                   Welcome to WeatherPro
                 </h2>
@@ -134,45 +103,43 @@ export default function Home() {
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
-                <div className="bg-white/10 rounded-lg p-3">
+                <div className="bg-white/10 rounded-lg p-3 hover:bg-white/20 transition-colors duration-200">
                   <div className="text-2xl mb-2">🌍</div>
                   <div className="text-white/90 font-medium">
                     Global Coverage
                   </div>
                 </div>
-                <div className="bg-white/10 rounded-lg p-3">
+                <div className="bg-white/10 rounded-lg p-3 hover:bg-white/20 transition-colors duration-200">
                   <div className="text-2xl mb-2">⚡</div>
                   <div className="text-white/90 font-medium">
                     Real-time Data
                   </div>
                 </div>
-                <div className="bg-white/10 rounded-lg p-3">
+                <div className="bg-white/10 rounded-lg p-3 hover:bg-white/20 transition-colors duration-200">
                   <div className="text-2xl mb-2">📱</div>
                   <div className="text-white/90 font-medium">Mobile Ready</div>
                 </div>
               </div>
-            </motion.div>
+            </div>
           )}
         </section>
 
         {/* Footer */}
-        <motion.footer
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1, duration: 0.6 }}
-          className="text-center mt-16 text-white/60"
+        <footer
+          className="text-center mt-16 text-white/60 animate-fade-in"
+          style={{ animationDelay: "0.6s" }}
         >
           <div className="flex items-center justify-center gap-6 mb-4">
             <a
               href="#"
-              className="flex items-center gap-2 hover:text-white/80 transition-colors"
+              className="flex items-center gap-2 hover:text-white/80 transition-colors duration-200"
             >
               <Github className="h-4 w-4" />
               <span className="text-sm">View Source</span>
             </a>
             <a
               href="#"
-              className="flex items-center gap-2 hover:text-white/80 transition-colors"
+              className="flex items-center gap-2 hover:text-white/80 transition-colors duration-200"
             >
               <ExternalLink className="h-4 w-4" />
               <span className="text-sm">API Docs</span>
@@ -182,7 +149,7 @@ export default function Home() {
             © 2024 WeatherPro. Built with Next.js and powered by
             OpenWeatherMap.
           </p>
-        </motion.footer>
+        </footer>
       </div>
     </main>
   );

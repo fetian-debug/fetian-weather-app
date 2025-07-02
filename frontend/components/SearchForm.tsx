@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { Search, Loader2 } from "lucide-react";
-import { motion } from "framer-motion";
 
 interface SearchFormProps {
   onSearch: (location: string) => void;
@@ -25,12 +24,9 @@ export default function SearchForm({
   };
 
   return (
-    <motion.form
+    <form
       onSubmit={handleSubmit}
-      className={`w-full max-w-md ${className}`}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
+      className={`w-full max-w-md animate-fade-in ${className}`}
     >
       <div className="relative">
         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -56,15 +52,11 @@ export default function SearchForm({
           disabled={!location.trim() || isLoading}
           className="absolute inset-y-0 right-0 flex items-center pr-3"
         >
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="primary-button py-2 px-4 text-sm"
-          >
+          <div className="primary-button py-2 px-4 text-sm hover:scale-105 transition-transform duration-200">
             {isLoading ? "Searching..." : "Get Weather"}
-          </motion.div>
+          </div>
         </button>
       </div>
-    </motion.form>
+    </form>
   );
 }
